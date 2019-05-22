@@ -31,7 +31,7 @@ import (
 
 const (
 	address     = "localhost:50051"
-	defaultName = "world"
+	defaultName = "Me!"
 )
 
 func main() {
@@ -55,4 +55,10 @@ func main() {
 		log.Fatalf("could not greet: %v", err)
 	}
 	log.Printf("Greeting: %s", r.Message)
+
+	p, err := c.SayGoodbye(ctx, &pb.GoodbyeRequest{Name: name})
+	if err != nil {
+		log.Fatalf("I don't wanna say goodbye: %v", err)
+	}
+	log.Printf("Greeting: %s", p.Message)
 }

@@ -23,6 +23,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"net"
 
@@ -40,7 +41,12 @@ type server struct{}
 // SayHello implements helloworld.GreeterServer
 func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
 	log.Printf("Received: %v", in.Name)
-	return &pb.HelloReply{Message: "Hello " + in.Name}, nil
+	return &pb.HelloReply{Message: fmt.Sprintf("Hello %s 👋", in.Name)}, nil
+}
+
+func (s *server) SayGoodbye(ctx context.Context, in *pb.GoodbyeRequest) (*pb.GoodbyeReply, error) {
+	log.Printf("Received: %v", in.Name)
+	return &pb.GoodbyeReply{Message: fmt.Sprintf("Goodbye %s 😥", in.Name)}, nil
 }
 
 func main() {
